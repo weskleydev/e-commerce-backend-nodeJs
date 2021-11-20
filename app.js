@@ -2,16 +2,10 @@
 
 require('dotenv').config()
 const express = require('express')
-const mongoose = require('mongoose')
-const connectionDb = require('./config/database')
+require('./config/database')
 const cors = require('cors')
 
 const app = express()
-const router = express.Router()
-
-// Connecta ao banco
-mongoose.connect(connectionDb.connectionString)
-
 
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -29,7 +23,7 @@ app.use(function (req, res, next) {
   next();
 })
 
-// Carrega as Rotas
+
 app.use('/', indexRoute)
 
 module.exports = app
