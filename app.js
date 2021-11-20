@@ -10,8 +10,12 @@ const app = express()
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+// Carrega os Models
+// require('./src/models/user-model')
+
 // Carrega as Rotas
 const indexRoute = require('./src/routes/index-route')
+const userRoute = require('./src/routes/user-route')
 
 
 // Habilita o CORS
@@ -25,5 +29,6 @@ app.use(function (req, res, next) {
 
 
 app.use('/', indexRoute)
+app.use('/users', userRoute)
 
 module.exports = app
