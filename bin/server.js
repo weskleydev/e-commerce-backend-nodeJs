@@ -1,23 +1,23 @@
-import app from '../src/app';
+// Module dependencies.
+const app = require('../app');
 const debug = require('debug')('modelo_api_nodejs:server');
-import http from 'http';
-
+const http = require('http');
 
 //Get port from environment and store in Express.
-
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-
 //Create HTTP server.
-
 var server = http.createServer(app);
 
-
+// Listen on provided port, on all network interfaces.
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+console.log('API rodando na porta ' + port);
 
 
 // Normalize a port into a number, string, or false. 
-
 function normalizePort(val) {
   const port = parseInt(val, 10);
   if (isNaN(port)) {
@@ -33,7 +33,6 @@ function normalizePort(val) {
 
 
 // Event listener for HTTP server "error" event. 
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -60,7 +59,6 @@ function onError(error) {
 
 
 // Event listener for HTTP server "listening" event. 
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'

@@ -1,13 +1,23 @@
 'use strict'
-import express, { Router, json, urlencoded } from 'express'
-import cors from 'cors'
+
 require('dotenv').config()
-require('.config/database');
+const express = require('express')
+const mongoose = require('mongoose')
+const connectionDb = require('./config/database')
+const cors = require('cors')
 
 const app = express()
+const router = express.Router()
 
-app.use(json({ limit: '5mb' }));
-app.use(urlencoded({ extended: true }));
+// Connecta ao banco
+mongoose.connect(connectionDb.connectionString)
+
+
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Carrega as Rotas
+const indexRoute = require('./src/routes/index-route')
 
 
 // Habilita o CORS
@@ -18,3 +28,8 @@ app.use(function (req, res, next) {
   app.use(cors());
   next();
 })
+
+// Carrega as Rotas
+app.use('/', indexRoute)
+
+module.exports = app
