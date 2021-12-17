@@ -1,1 +1,1 @@
-<h1>Modelo de Api NodeJs</h1>
+This project is a backend in nodejs for E-commerce for a Flutter application.
