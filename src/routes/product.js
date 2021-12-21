@@ -9,7 +9,7 @@ router.get('/', controller.get);
 router.get('/:id', controller.getById);
 router.get('/category/:id', controller.getByCategoryId);
 router.post('/', jwt.isAdmin, controller.post);
-router.put('/:id', jwt.isAdmin, controller.put);
+router.put('/:id', jwt.authorize, controller.put);
 router.delete('/', jwt.isAdmin, controller.delete);
 
 module.exports = router;
